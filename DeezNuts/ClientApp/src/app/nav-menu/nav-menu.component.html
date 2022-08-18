@@ -1,44 +1,31 @@
-<header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">DeezNuts</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
-        </ul>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">DeezNuts</a>
+      <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Matches</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Lists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Messages</a>
+        </li>
+      </ul>
+      <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
+        <a class="dropdown-toggle text-light" dropdownToggle>Welcome loner</a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item">Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
       </div>
+      <form #loginForm="ngForm" *ngIf="(accountService.currentUser$ | async) === null" class="d-flex" (ngSubmit)="login()" autocomplete="off">
+        <input name="username" class="form-control me-2" type="text" placeholder="Username" [(ngModel)]="model.username">
+        <input name="password" class="form-control me-2" type="password" placeholder="Password" [(ngModel)]="model.password">
+        <button class="btn btn-outline-success" type="submit">Login</button>
+      </form>
     </div>
-  </nav>
-</header>
+  </div>
+</nav>

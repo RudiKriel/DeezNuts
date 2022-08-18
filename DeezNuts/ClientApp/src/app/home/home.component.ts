@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,4 +6,17 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+  registerMode: boolean = false;
+
+  constructor() { }
+
+  ngOnInit() { }
+
+  registerToggle() {
+    this.registerMode = !this.registerMode;
+  }
+
+  cancelRegisterMode(event: boolean) {
+    this.registerMode = event;
+  }
 }
