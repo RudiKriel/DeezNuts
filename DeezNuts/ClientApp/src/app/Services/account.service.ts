@@ -19,7 +19,7 @@ export class AccountService {
       map((response: User) => {
         const user = response;
 
-        if (user) {
+        if (user && Object.keys(user).length > 0) {
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSource.next(user);
         }
@@ -30,7 +30,7 @@ export class AccountService {
   register(model: any) {
     return this.http.post<User>(`${this.baseUrl}account/register`, model).pipe(
       map((user: User) => {
-        if (user) {
+        if (user && Object.keys(user).length > 0) {
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSource.next(user);
         }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from '../Models/user';
 import { AccountService } from '../Services/account.service';
@@ -11,20 +13,21 @@ import { AccountService } from '../Services/account.service';
 export class NavMenuComponent implements OnInit {
   model: any = {};
 
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {}
 
   login() {
     this.accountService.login(this.model).subscribe({
       next: response => {
-        console.log(response);
+        this.router.navigateByUrl('/members');
       },
-      error: error => console.log(error)
+      error: error => this.toastr.error(error.error)
     });
   }
 
   logout() {
     this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 }

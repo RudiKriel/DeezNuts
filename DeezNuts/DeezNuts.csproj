@@ -37,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\Guards\" />
     <Folder Include="ClientApp\src\app\Services\" />
     <Folder Include="ClientApp\ssl\" />
   </ItemGroup>
