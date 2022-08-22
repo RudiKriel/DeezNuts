@@ -1,32 +1,37 @@
-﻿using Common.Models;
-using DAL.Context;
+﻿using AutoMapper;
+using Common.DTOs;
+using DAL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DeezNuts.Controllers
 {
+    [Authorize]
     public class UsersController : BaseApiController
     {
-        private ApplicationDbContext _context { get; }
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
-            _context = context;
+            _mapper = mapper;
+            _userRepository = userRepository;
         }
 
-        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
-        }
+            var users = await _userRepository.GetMembersAsync();
 
-        [Authorize]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+            return Ok(users);
+        }
+        
+        [HttpGet("{username}")]
+        public async Task<ActionResult<MemberDTO>> GetUser(string username)
         {
-            return await _context.Users.FindAsync(id);
+            var user = await _userRepository.GetMemberAsync(username);
+
+            return user;
         }
     }
 }
