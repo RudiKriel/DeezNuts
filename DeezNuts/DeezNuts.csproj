@@ -29,6 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\Models\member.ts" />
+    <None Remove="ClientApp\src\app\Models\photo.ts" />
     <None Remove="ClientApp\src\app\Models\user.ts" />
   </ItemGroup>
 
@@ -46,6 +48,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\Models\photo.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\Models\member.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\Models\user.ts" />
   </ItemGroup>
 

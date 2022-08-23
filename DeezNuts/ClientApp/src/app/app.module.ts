@@ -11,17 +11,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './Modules/shared.module';
 
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { ListsComponent } from './lists/lists.component';
-import { MessagesComponent } from './messages/messages.component';
+import { NavMenuComponent } from './Views/nav-menu/nav-menu.component';
+import { HomeComponent } from './Views/home/home.component';
+import { RegisterComponent } from './Views/register/register.component';
+import { MemberListComponent } from './Views/members/member-list/member-list.component';
+import { MemberDetailComponent } from './Views/members/member-detail/member-detail.component';
+import { ListsComponent } from './Views/lists/lists.component';
+import { MessagesComponent } from './Views/messages/messages.component';
 import { TestErrorsComponent } from './Errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './Interceptors/error.interceptor';
 import { NotFoundComponent } from './Errors/not-found/not-found.component';
 import { ServerErrorComponent } from './Errors/server-error/server-error.component';
+import { MemberCardComponent } from './Views/members/member-card/member-card.component';
+import { JwtInterceptor } from './Interceptors/jwt.interceptor';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { ServerErrorComponent } from './Errors/server-error/server-error.compone
     MessagesComponent,
     TestErrorsComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    MemberCardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -50,7 +53,8 @@ import { ServerErrorComponent } from './Errors/server-error/server-error.compone
     SharedModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

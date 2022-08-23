@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { ListsComponent } from './lists/lists.component';
-import { MessagesComponent } from './messages/messages.component';
+import { HomeComponent } from './Views/home/home.component';
+import { MemberListComponent } from './Views/members/member-list/member-list.component';
+import { MemberDetailComponent } from './Views/members/member-detail/member-detail.component';
+import { ListsComponent } from './Views/lists/lists.component';
+import { MessagesComponent } from './Views/messages/messages.component';
 import { AuthGuard } from './Guards/auth.guard';
 import { TestErrorsComponent } from './Errors/test-errors/test-errors.component';
 import { NotFoundComponent } from './Errors/not-found/not-found.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'members', component: MemberListComponent },
-      { path: 'members/:id', component: MemberDetailComponent },
+      { path: 'members/:username', component: MemberDetailComponent },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent }
     ]
