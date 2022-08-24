@@ -1,4 +1,4 @@
-﻿using BLL.Interfaces;
+﻿using DeezNuts.BLL.Interfaces;
 using Common.DTOs;
 using Common.Models;
 using DAL.Context;
@@ -12,9 +12,9 @@ namespace DeezNuts.Controllers
     public class AccountController : BaseApiController
     {
         private readonly ApplicationDbContext _context;
-        private readonly ITokenManager _tokenManager;
+        private readonly ITokenService _tokenManager;
 
-        public AccountController(ApplicationDbContext context, ITokenManager tokenManager)
+        public AccountController(ApplicationDbContext context, ITokenService tokenManager)
         {
             _tokenManager = tokenManager;
             _context = context;
@@ -50,7 +50,7 @@ namespace DeezNuts.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO model)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == model.Username);
+            var user = await _context.Users.Include(u => u.Photos).SingleOrDefaultAsync(u => u.UserName == model.Username);
 
             if (user == null)
             {
@@ -71,7 +71,8 @@ namespace DeezNuts.Controllers
             return new UserDTO()
             {
                 Username = user.UserName,
-                Token = _tokenManager.CreateToken(user)
+                Token = _tokenManager.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(u => u.IsMain)?.Url
             };
         }
 

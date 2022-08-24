@@ -27,6 +27,7 @@ import { MemberCardComponent } from './Views/members/member-card/member-card.com
 import { JwtInterceptor } from './Interceptors/jwt.interceptor';
 import { MemberEditComponent } from './Views/members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './Interceptors/loading.interceptor';
+import { PhotoEditorComponent } from './Views/members/photo-editor/photo-editor.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { LoadingInterceptor } from './Interceptors/loading.interceptor';
     NotFoundComponent,
     ServerErrorComponent,
     MemberCardComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

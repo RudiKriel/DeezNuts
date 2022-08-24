@@ -8,11 +8,11 @@ using System.Text;
 
 namespace BLL.Managers
 {
-    public class TokenManager : ITokenManager
+    public class TokenService : ITokenService
     {
         private readonly SymmetricSecurityKey _key;
 
-        public TokenManager(IConfiguration config)
+        public TokenService(IConfiguration config)
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }

@@ -1,5 +1,5 @@
-﻿using BLL.Interfaces;
-using BLL.Managers;
+﻿using DeezNuts.BLL.Interfaces;
+using DeezNuts.BLL.Managers;
 using DAL.Context;
 using DAL.Interfaces;
 using DAL.Repositories;
@@ -12,7 +12,9 @@ namespace DeezNuts.Extenstions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddScoped<ITokenManager, TokenManager>();
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<ApplicationDbContext>(context =>

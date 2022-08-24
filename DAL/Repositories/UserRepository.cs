@@ -26,7 +26,7 @@ namespace DAL.Repositories
 
         public async Task<User> GetUserByUsernameAsync(string name)
         {
-            return await _context.Users.SingleOrDefaultAsync(u => u.UserName == name);
+            return await _context.Users.Include(u => u.Photos).SingleOrDefaultAsync(u => u.UserName == name);
         }
 
         public async Task<IEnumerable<User>> GetUsersAsync()

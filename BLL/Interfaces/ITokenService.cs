@@ -2,7 +2,7 @@
 
 namespace BLL.Interfaces
 {
-    public interface ITokenManager
+    public interface ITokenService
     {
         string CreateToken(User user);
     }
