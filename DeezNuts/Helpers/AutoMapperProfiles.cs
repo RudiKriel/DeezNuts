@@ -10,7 +10,7 @@ namespace DeezNuts.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<User, MemberDTO>()
-                .ForMember(dest => dest.PhotoURL, opt => opt.MapFrom(src => src.Photos != null && src.Photos.FirstOrDefault(u => u.IsMain) != null ? src.Photos.FirstOrDefault(u => u.IsMain).Url : null))
+                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos != null && src.Photos.FirstOrDefault(u => u.IsMain) != null ? src.Photos.FirstOrDefault(u => u.IsMain).Url : null))
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()))
                 .ForMember(dest => dest.Photos, opt =>
                 {
