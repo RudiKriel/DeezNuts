@@ -1,5 +1,6 @@
 ﻿using Common.DTOs;
 using Common.Models;
+using DAL.Helpers;
 
 namespace DAL.Interfaces
 {
@@ -11,6 +12,6 @@ namespace DAL.Interfaces
         Task<User> GetUserByIdAsync(int id);
         Task<User> GetUserByUsernameAsync(string name);
         Task<MemberDTO> GetMemberAsync(string username);
-        Task<IEnumerable<MemberDTO>> GetMembersAsync();
+        Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams);
     }
 }

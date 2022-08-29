@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DeezNuts.Helpers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeezNuts.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [ApiController]
     [Route("api/[controller]")]
     public class BaseApiController : ControllerBase
