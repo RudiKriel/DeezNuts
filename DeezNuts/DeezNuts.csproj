@@ -43,7 +43,7 @@
     <Folder Include="ClientApp\src\app\Guards\" />
     <Folder Include="ClientApp\src\app\Errors\" />
     <Folder Include="ClientApp\src\app\Interceptors\" />
-    <Folder Include="ClientApp\src\app\Services\" />
+    <Folder Include="ClientApp\src\app\Resolvers\" />
     <Folder Include="ClientApp\ssl\" />
   </ItemGroup>
 

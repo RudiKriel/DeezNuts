@@ -18,19 +18,10 @@ namespace Common.Models
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public DateTime LastActive { get; set; } = DateTime.Now;
 
-        public int GetAge()
-        {
-            var today = DateTime.Today;
-            var age = today.Year - DateOfBirth.Year;
-
-            if (DateOfBirth.Date > today.AddYears(-age))
-                age--;
-
-            return age;
-        }
-
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<UserLike> LikedByUsers { get; set; }
         public virtual ICollection<UserLike> LikedUsers { get; set; }
+        public virtual ICollection<Message> MessagesSent { get; set; }
+        public virtual ICollection<Message> MessagesReceived { get; set; }
     }
 }

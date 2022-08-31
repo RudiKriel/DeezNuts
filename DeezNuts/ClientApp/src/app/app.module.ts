@@ -30,6 +30,7 @@ import { LoadingInterceptor } from './Interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './Views/members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './Views/text-input/text-input.component';
 import { DateInputComponent } from './Views/date-input/date-input.component';
+import { MemberMessagesComponent } from './Views/members/member-messages/member-messages.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { DateInputComponent } from './Views/date-input/date-input.component';
     MemberEditComponent,
     PhotoEditorComponent,
     TextInputComponent,
-    DateInputComponent
+    DateInputComponent,
+    MemberMessagesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
