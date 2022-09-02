@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using DAL.Context;
 using DAL.Seed;
+using Common.Models;
 
 namespace API
 {
@@ -16,8 +18,11 @@ namespace API
             try
             {
                 var context = services.GetRequiredService<ApplicationDbContext>();
+                var userManager = services.GetRequiredService<UserManager<User>>();
+                var roleManager = services.GetRequiredService<RoleManager<Role>>();
+
                 await context.Database.MigrateAsync();
-                await Seed.SeedUsers(context);
+                await Seed.SeedUsers(userManager, roleManager);
             }
             catch (Exception ex)
             {

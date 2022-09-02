@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Common.Models;
+using DAL.Context;
 
 namespace DeezNuts.Extenstions
 {
@@ -8,6 +11,13 @@ namespace DeezNuts.Extenstions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddIdentityCore<User>()
+                .AddRoles<Role>()
+                .AddRoleManager<RoleManager<Role>>()
+                .AddSignInManager<SignInManager<User>>()
+                .AddRoleValidator<RoleValidator<Role>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters()
@@ -17,6 +27,11 @@ namespace DeezNuts.Extenstions
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+            });
+
+            services.AddAuthorization(opt => {
+                opt.AddPolicy("RequiredAdminRole", policy => policy.RequireRole("Admin"));
+                opt.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
             });
 
             return services;

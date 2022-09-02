@@ -31,6 +31,11 @@ import { PhotoEditorComponent } from './Views/members/photo-editor/photo-editor.
 import { TextInputComponent } from './Views/text-input/text-input.component';
 import { DateInputComponent } from './Views/date-input/date-input.component';
 import { MemberMessagesComponent } from './Views/members/member-messages/member-messages.component';
+import { AdminPanelComponent } from './Views/admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './Directives/has-role.directive';
+import { UserManagementComponent } from './Views/admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './Views/admin/photo-management/photo-management.component';
+import { RolesModalComponent } from './Views/Modals/roles-modal/roles-modal.component';
 
 
 @NgModule({
@@ -53,7 +58,12 @@ import { MemberMessagesComponent } from './Views/members/member-messages/member-
     PhotoEditorComponent,
     TextInputComponent,
     DateInputComponent,
-    MemberMessagesComponent
+    MemberMessagesComponent,
+    AdminPanelComponent,
+    HasRoleDirective,
+    UserManagementComponent,
+    PhotoManagementComponent,
+    RolesModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

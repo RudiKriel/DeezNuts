@@ -1,10 +1,9 @@
-﻿
+﻿using Microsoft.AspNetCore.Identity;
+
 namespace Common.Models
 {
-    public class User
+    public class User : IdentityUser<int>
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
         public string KnownAs { get; set; }
         public string Gender { get; set; }
         public string Introduction { get; set; }
@@ -12,8 +11,6 @@ namespace Common.Models
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public DateTime LastActive { get; set; } = DateTime.Now;
@@ -23,5 +20,6 @@ namespace Common.Models
         public virtual ICollection<UserLike> LikedUsers { get; set; }
         public virtual ICollection<Message> MessagesSent { get; set; }
         public virtual ICollection<Message> MessagesReceived { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }
