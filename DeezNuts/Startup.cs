@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using DeezNuts.Extenstions;
 using DeezNuts.Helpers;
+using DeezNuts.BLL.Managers;
 
 namespace API
 {
@@ -27,6 +28,7 @@ namespace API
 
             services.AddCors();
             services.AddIdentityServices(_config);
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +47,10 @@ namespace API
 
             app.UseRouting();
 
-            app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:44495"));
+            app.UseCors(p => p.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .WithOrigins("https://localhost:44495"));
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -53,6 +58,8 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
             });
         }
     }

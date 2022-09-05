@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\Models\group.ts" />
     <None Remove="ClientApp\src\app\Models\member.ts" />
     <None Remove="ClientApp\src\app\Models\photo.ts" />
     <None Remove="ClientApp\src\app\Models\user.ts" />
@@ -51,6 +52,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\Models\group.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\Models\photo.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
