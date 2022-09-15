@@ -35,11 +35,6 @@ namespace DAL.Repositories
             return await _context.Users.Include(u => u.Photos).ToListAsync();
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public void Update(User user)
         {
             _context.Entry(user).State = EntityState.Modified;
@@ -67,6 +62,11 @@ namespace DAL.Repositories
             };
 
             return await PagedList<MemberDTO>.CreateAsync(query.ProjectTo<MemberDTO>(_mapper.ConfigurationProvider).AsNoTracking(), userParams.PageNumber, userParams.PageSize);
+        }
+
+        public async Task<string> GetUserGender(string username)
+        {
+            return await _context.Users.Where(u => u.UserName == username).Select(u => u.Gender).FirstOrDefaultAsync();
         }
     }
 }

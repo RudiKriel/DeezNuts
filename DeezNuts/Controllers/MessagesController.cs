@@ -12,14 +12,12 @@ namespace DeezNuts.Controllers
     [Authorize]
     public class MessagesController : BaseApiController
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IMessageRepository _messagesRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public MessagesController(IUserRepository userRepository, IMessageRepository messagesRepository, IMapper mapper)
+        public MessagesController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _userRepository = userRepository;
-            _messagesRepository = messagesRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -33,8 +31,8 @@ namespace DeezNuts.Controllers
                 return BadRequest("We know you are lonelly, but try not to send messages to yourself");
             }
 
-            var sender = await _userRepository.GetUserByUsernameAsync(username);
-            var recipient = await _userRepository.GetUserByUsernameAsync(model.RecipientUsername);
+            var sender = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            var recipient = await _unitOfWork.UserRepository.GetUserByUsernameAsync(model.RecipientUsername);
 
             if (recipient  == null)
             {
@@ -50,9 +48,9 @@ namespace DeezNuts.Controllers
                 Content = model.Content
             };
 
-            _messagesRepository.AddMessage(message);
+            _unitOfWork.MessageRepository.AddMessage(message);
 
-            if (await _messagesRepository.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             {
                 return Ok(_mapper.Map<MessageDTO>(message));
             }
@@ -65,26 +63,18 @@ namespace DeezNuts.Controllers
         {
             messageParams.Username = User.GetUserName();
 
-            var messages = await _messagesRepository.GetMessagesForUser(messageParams);
+            var messages = await _unitOfWork.MessageRepository.GetMessagesForUser(messageParams);
 
             Response.AddPaginationHeader(messages.CurrentPage, messages.PageSize, messages.TotalCount, messages.TotalPages);
 
             return messages;
         }
 
-        [HttpGet("thread/{username}")]
-        public async Task<ActionResult<IEnumerable<MessageDTO>>> GetMessageThread(string username)
-        {
-            var currentUsername = User.GetUserName();
-
-            return Ok(await _messagesRepository.GetMessageThread(currentUsername, username));
-        }
-
         [HttpDelete("delete-message/{id}")]
         public async Task<ActionResult> DeleteMessage(int id)
         {
             var username = User.GetUserName();
-            var message = await _messagesRepository.GetMessage(id);
+            var message = await _unitOfWork.MessageRepository.GetMessage(id);
 
             if (message.Sender.UserName != username && message.Recipient.UserName != username)
             {
@@ -103,10 +93,10 @@ namespace DeezNuts.Controllers
 
             if (message.SenderDeleted && message.RecipientDeleted)
             {
-                _messagesRepository.DeleteMessage(message);
+                _unitOfWork.MessageRepository.DeleteMessage(message);
             }
 
-            if (await _messagesRepository.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             {
                 return Ok();
             }

@@ -47,7 +47,6 @@
     <Folder Include="ClientApp\src\app\Directives\" />
     <Folder Include="ClientApp\src\app\Resolvers\" />
     <Folder Include="ClientApp\src\app\Views\admin\" />
-    <Folder Include="ClientApp\src\app\Views\Modals\" />
     <Folder Include="ClientApp\ssl\" />
   </ItemGroup>
 

@@ -36,6 +36,7 @@ import { HasRoleDirective } from './Directives/has-role.directive';
 import { UserManagementComponent } from './Views/admin/user-management/user-management.component';
 import { PhotoManagementComponent } from './Views/admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './Views/Modals/roles-modal/roles-modal.component';
+import { ConfirmDialogComponent } from './Views/Modals/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { RolesModalComponent } from './Views/Modals/roles-modal/roles-modal.comp
     HasRoleDirective,
     UserManagementComponent,
     PhotoManagementComponent,
-    RolesModalComponent
+    RolesModalComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

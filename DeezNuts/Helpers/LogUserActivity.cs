@@ -16,12 +16,12 @@ namespace DeezNuts.Helpers
             }
 
             var userId = resultContext.HttpContext.User.GetUserId();
-            var repository = resultContext.HttpContext.RequestServices.GetService<IUserRepository>();
-            var user = await repository.GetUserByIdAsync(userId);
+            var uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
+            var user = await uow.UserRepository.GetUserByIdAsync(userId);
 
-            user.LastActive = DateTime.Now;
+            user.LastActive = DateTime.UtcNow;
 
-            await repository.SaveAllAsync();
+            await uow.Complete();
         }
     }
 }

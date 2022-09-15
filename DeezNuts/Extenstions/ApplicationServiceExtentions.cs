@@ -2,9 +2,9 @@
 using DeezNuts.BLL.Managers;
 using DAL.Context;
 using DAL.Interfaces;
-using DAL.Repositories;
 using DeezNuts.Helpers;
 using Microsoft.EntityFrameworkCore;
+using DAL;
 
 namespace DeezNuts.Extenstions
 {
@@ -16,10 +16,8 @@ namespace DeezNuts.Extenstions
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<LogUserActivity>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ILikesRepository, LikesRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<ApplicationDbContext>(context =>
             {
