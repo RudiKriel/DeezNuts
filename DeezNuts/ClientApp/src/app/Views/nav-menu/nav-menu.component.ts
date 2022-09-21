@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountMemberService } from '../../Services/account-member.service';
 import { AccountService } from '../../Services/account.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { AccountService } from '../../Services/account.service';
 export class NavMenuComponent implements OnInit {
   model: any = {};
 
-  constructor(public accountService: AccountService, private router: Router) { }
+  constructor(public accountService: AccountService, private accountMemberService: AccountMemberService, private router: Router) { }
 
   ngOnInit() {}
 
@@ -23,7 +24,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   logout() {
-    this.accountService.logout();
+    this.accountMemberService.logout();
     this.router.navigateByUrl('/');
   }
 }

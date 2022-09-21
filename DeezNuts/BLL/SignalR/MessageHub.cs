@@ -40,7 +40,7 @@ namespace DeezNuts.BLL.Managers
                 await _unitOfWork.Complete();
             }
 
-            await Clients.Caller.SendAsync("ReceiveMessageThread", messages);
+            await Clients.Caller.SendAsync("ReceiveMessageThread", _mapper.Map<List<MessageDTO>>(messages));
         }
 
         public override async Task OnDisconnectedAsync(Exception ex)

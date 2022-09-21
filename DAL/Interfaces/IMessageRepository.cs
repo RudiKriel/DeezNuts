@@ -15,6 +15,6 @@ namespace DAL.Interfaces
         Task<Group> GetGroupForConnection(string connectionId);
         Task<Message> GetMessage(int id);
         Task<PagedList<MessageDTO>> GetMessagesForUser(MessageParams messageParams);
-        Task<IEnumerable<MessageDTO>> GetMessageThread(string currentUserName, string recipientUsername);
+        Task<IEnumerable<Message>> GetMessageThread(string currentUserName, string recipientUsername);
     }
 }

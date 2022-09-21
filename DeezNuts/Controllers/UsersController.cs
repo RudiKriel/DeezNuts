@@ -45,7 +45,8 @@ namespace DeezNuts.Controllers
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDTO>> GetUser(string username)
         {
-            var user = await _unitOfWork.UserRepository.GetMemberAsync(username);
+            var currentUsername = User.GetUserName();
+            var user = await _unitOfWork.UserRepository.GetMemberAsync(username, currentUsername == username);
 
             return user;
         }
@@ -84,11 +85,6 @@ namespace DeezNuts.Controllers
                 Url = result.SecureUrl.AbsoluteUri,
                 PublicId = result.PublicId
             };
-
-            if (user.Photos.Count == 0)
-            {
-                photo.IsMain = true;
-            }
 
             user.Photos.Add(photo);
 

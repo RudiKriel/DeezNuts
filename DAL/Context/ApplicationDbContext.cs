@@ -22,6 +22,7 @@ namespace DAL.Context
         public DbSet<Message> Messages { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -66,6 +67,10 @@ namespace DAL.Context
                  .HasOne(u => u.Sender)
                  .WithMany(m => m.MessagesSent)
                  .OnDelete(DeleteBehavior.NoAction);
+
+            //Photos
+            builder.Entity<Photo>()
+                .HasQueryFilter(p => p.IsApproved);
 
             builder.ApplyUtcDateTimeConverter();
         }

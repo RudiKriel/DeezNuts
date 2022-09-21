@@ -22,7 +22,6 @@ export class MemberEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
-  
 
   constructor(private accountService: AccountService, private memberService: MembersService, private toastr: ToastrService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({

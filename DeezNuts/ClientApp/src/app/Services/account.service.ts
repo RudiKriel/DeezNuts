@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { User } from '../Models/user';
+import { UserParams } from '../Models/userParams';
 import { PresenceService } from './presence.service';
 
 @Injectable({
@@ -11,6 +12,7 @@ import { PresenceService } from './presence.service';
 })
 export class AccountService {
   baseUrl = environment.apiUrl;
+  userParams!: UserParams;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
@@ -24,6 +26,7 @@ export class AccountService {
         if (user && Object.keys(user).length > 0) {
           this.setCurrentUser(user);
           this.presence.createHubConnection(user);
+          this.userParams = new UserParams(user);
         }
       })
     );
@@ -44,13 +47,22 @@ export class AccountService {
 
   setCurrentUser(user: User) {
     user.roles = [];
-
     const roles = this.getDecodedToken(user.token).role;
 
-    Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+    if (roles !== '') {
+      Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
 
-    localStorage.setItem('user', JSON.stringify(user));
-    this.currentUserSource.next(user);
+      localStorage.setItem('user', JSON.stringify(user));
+      this.currentUserSource.next(user);
+    }
+  }
+
+  resetUserParams() {
+    return this.currentUser$.pipe(
+      map((user: User) => {
+        return new UserParams(user);
+      })
+    );
   }
 
   logout() {
@@ -61,6 +73,6 @@ export class AccountService {
   }
 
   getDecodedToken(token: string) {
-    return JSON.parse(atob(token.split('.')[1]));
+    return token ? JSON.parse(atob(token.split('.')[1])) : '';
   }
 }

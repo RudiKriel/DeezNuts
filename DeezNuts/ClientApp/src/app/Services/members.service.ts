@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -48,7 +48,7 @@ export class MembersService {
 
         return response;
       }
-      ));
+    ));
   }
 
   getMember(username: string) {
@@ -61,18 +61,8 @@ export class MembersService {
     return this.http.get<Member>(`${this.baseUrl}users/${username}`);
   }
 
-  getUserParams() {
-    return this.userParams
-  }
-
   setUserParams(params: UserParams) {
     this.userParams = params;
-  }
-
-  resetUserParams() {
-    this.userParams = new UserParams(this.user);
-
-    return this.userParams;
   }
 
   updateMember(member: Member) {

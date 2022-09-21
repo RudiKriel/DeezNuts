@@ -14,7 +14,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/women/93.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "IsApproved": true
       }
     ]
   },
@@ -33,7 +34,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/women/10.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "IsApproved": true
       }
     ]
   },
@@ -52,7 +54,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/women/2.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "IsApproved": true
       }
     ]
   },
@@ -71,7 +74,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/women/28.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "IsApproved": true
       }
     ]
   },
@@ -90,7 +94,48 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/women/96.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "IsApproved": true
+      }
+    ]
+  },
+  {
+    "UserName": "Betty",
+    "Gender": "female",
+    "DateOfBirth": "1999-12-16",
+    "KnownAs": "Bitch",
+    "Created": "2019-12-20",
+    "LastActive": "2021-07-21",
+    "Introduction": "Est qui aute velit tempor ipsum nulla do eu. Proident deserunt dolore laborum adipisicing. Ullamco nulla tempor consequat deserunt pariatur culpa minim deserunt enim. In minim consequat voluptate minim.\r\n",
+    "LookingFor": "Ut sint sit fugiat aute voluptate ullamco. Deserunt tempor ad voluptate eu tempor occaecat irure consequat ipsum enim. Sit magna esse anim consequat in incididunt adipisicing officia magna. Cillum quis incididunt est ex voluptate pariatur non deserunt dolor. Cupidatat laboris fugiat esse consectetur laborum esse commodo sint quis esse exercitation nulla.\r\n",
+    "Interests": "Life is a dream.",
+    "City": "Johannesburg",
+    "Country": "South Africa",
+    "Photos": [
+      {
+        "Url": "https://randomuser.me/api/portraits/women/1.jpg",
+        "IsMain": true,
+        "IsApproved": true
+      }
+    ]
+  },
+  {
+    "UserName": "Donna",
+    "Gender": "female",
+    "DateOfBirth": "1979-07-16",
+    "KnownAs": "Donna",
+    "Created": "2022-01-20",
+    "LastActive": "2022-07-21",
+    "Introduction": "Est qui aute velit tempor ipsum nulla do eu. Proident deserunt dolore laborum adipisicing. Ullamco nulla tempor consequat deserunt pariatur culpa minim deserunt enim. In minim consequat voluptate minim.\r\n",
+    "LookingFor": "Ut sint sit fugiat aute voluptate ullamco. Deserunt tempor ad voluptate eu tempor occaecat irure consequat ipsum enim. Sit magna esse anim consequat in incididunt adipisicing officia magna. Cillum quis incididunt est ex voluptate pariatur non deserunt dolor. Cupidatat laboris fugiat esse consectetur laborum esse commodo sint quis esse exercitation nulla.\r\n",
+    "Interests": "Larras garage is clean during the night.",
+    "City": "Harare",
+    "Country": "Zimbabwe",
+    "Photos": [
+      {
+        "Url": "https://randomuser.me/api/portraits/women/25.jpg",
+        "IsMain": true,
+        "IsApproved": true
       }
     ]
   },
@@ -109,7 +154,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/men/67.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "IsApproved": true
       }
     ]
   },
@@ -128,7 +174,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/men/95.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "IsApproved": true
       }
     ]
   },
@@ -147,7 +194,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/men/29.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "IsApproved": true
       }
     ]
   },
@@ -166,7 +214,8 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/men/92.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "IsApproved": true
       }
     ]
   },
@@ -185,7 +234,28 @@
     "Photos": [
       {
         "Url": "https://randomuser.me/api/portraits/men/55.jpg",
-        "IsMain": true
+        "IsMain": true,
+        "IsApproved": true
+      }
+    ]
+  },
+  {
+    "UserName": "Thabo",
+    "Gender": "male",
+    "DateOfBirth": "1969-12-26",
+    "KnownAs": "Moses",
+    "Created": "2021-12-20",
+    "LastActive": "2020-01-21",
+    "Introduction": "I hate Jan van Riebeek and appartheid is the cause of Eskom's problems. Viva ANC, VIVAAAA!'",
+    "LookingFor": "Grants, increases and I demand everything the white man has.",
+    "Interests": "Looting, stealing, raping, killing and striking.",
+    "City": "Durban",
+    "Country": "South Africa",
+    "Photos": [
+      {
+        "Url": "https://randomuser.me/api/portraits/men/25.jpg",
+        "IsMain": true,
+        "IsApproved": true
       }
     ]
   }

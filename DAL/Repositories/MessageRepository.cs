@@ -51,13 +51,13 @@ namespace DAL.Repositories
             return await PagedList<MessageDTO>.CreateAsync(messages, messageParams.PageNumber, messageParams.PageSize);
         }
 
-        public async Task<IEnumerable<MessageDTO>> GetMessageThread(string currentUserName, string recipientUsername)
+        public async Task<IEnumerable<Message>> GetMessageThread(string currentUserName, string recipientUsername)
         {
             var messages = await _context.Messages.Where(m => (m.Recipient.UserName == currentUserName && m.Sender.UserName == recipientUsername && !m.RecipientDeleted)
                         || (m.Recipient.UserName == recipientUsername && m.SenderUsername == currentUserName && !m.SenderDeleted))
-                .OrderBy(m => m.MessageSent)
-                .ProjectTo<MessageDTO>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+                .OrderBy(m => m.MessageSent).ToListAsync();
+                //.ProjectTo<MessageDTO>(_mapper.ConfigurationProvider)
+                //.ToListAsync();
 
             var unreadMessages = messages.Where(m => m.DateRead == null && m.RecipientUsername == currentUserName).ToList();
 

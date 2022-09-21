@@ -27,7 +27,7 @@ namespace DAL.Repositories
 
         public async Task<User> GetUserByUsernameAsync(string name)
         {
-            return await _context.Users.Include(u => u.Photos).SingleOrDefaultAsync(u => u.UserName == name);
+            return await _context.Users.Include(u => u.Photos).IgnoreQueryFilters().SingleOrDefaultAsync(u => u.UserName == name);
         }
 
         public async Task<IEnumerable<User>> GetUsersAsync()
@@ -40,9 +40,16 @@ namespace DAL.Repositories
             _context.Entry(user).State = EntityState.Modified;
         }
 
-        public async Task<MemberDTO> GetMemberAsync(string username)
+        public async Task<MemberDTO> GetMemberAsync(string username, bool isCurrentUser = false)
         {
-            return await _context.Users.Where(u => u.UserName == username).ProjectTo<MemberDTO>(_mapper.ConfigurationProvider).SingleOrDefaultAsync();
+            var query = _context.Users.Include(u => u.Photos).Where(u => u.UserName == username).ProjectTo<MemberDTO>(_mapper.ConfigurationProvider).AsQueryable();
+
+            if (isCurrentUser)
+            {
+                query = query.IgnoreQueryFilters();
+            }
+
+            return await query.FirstOrDefaultAsync();
         }
 
         public async Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams)
@@ -67,6 +74,11 @@ namespace DAL.Repositories
         public async Task<string> GetUserGender(string username)
         {
             return await _context.Users.Where(u => u.UserName == username).Select(u => u.Gender).FirstOrDefaultAsync();
+        }
+
+        public async Task<User> GetUserByPhotoId(int photoId)
+        {
+            return await _context.Users.IgnoreQueryFilters().FirstOrDefaultAsync(u => u.Photos.Any(p => p.Id == photoId));
         }
     }
 }
