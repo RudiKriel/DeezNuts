@@ -84,7 +84,7 @@ namespace DAL.Repositories
 
         public async Task<Group> GetMessageGroup(string groupName)
         {
-            return await _context.Groups.FirstOrDefaultAsync(g => g.Name == groupName);
+            return await _context.Groups.Include(g => g.Connections).FirstOrDefaultAsync(g => g.Name == groupName);
         }
 
         public void RemoveConnection(Connection connection)

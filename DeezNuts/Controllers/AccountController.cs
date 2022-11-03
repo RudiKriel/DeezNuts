@@ -62,7 +62,7 @@ namespace DeezNuts.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO model)
         {
-            var user = await _userManager.Users.SingleOrDefaultAsync(u => u.UserName == model.Username.ToLower());
+            var user = await _userManager.Users.Include(u => u.Photos).SingleOrDefaultAsync(u => u.UserName == model.Username.ToLower());
 
             if (user == null)
             {

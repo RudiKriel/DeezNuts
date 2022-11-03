@@ -21,6 +21,8 @@ namespace API
                 var userManager = services.GetRequiredService<UserManager<User>>();
                 var roleManager = services.GetRequiredService<RoleManager<Role>>();
 
+                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
                 await context.Database.MigrateAsync();
                 await Seed.SeedUsers(userManager, roleManager);
             }
